@@ -6,10 +6,10 @@
              wheelDiameter="4.0"
              wheelBase="13.75"
              track="15.0"
-             maxVelocity="36.0"
-             maxAngularVelocity="36.0"
-             maxAcceleration="12.0"
-             maxAngularAcceleration="6.0">
+             maxVelocity="16.0"
+             maxAngularVelocity="75.0"
+             maxAcceleration="50.0"
+             maxAngularAcceleration="200.0">
 
         <motor usage="DIFFERENTIAL_LEFT_MAIN"
                canId="1"
