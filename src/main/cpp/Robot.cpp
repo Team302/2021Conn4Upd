@@ -115,9 +115,24 @@ void Robot::TeleopPeriodic()
 {
   if (m_chassis != nullptr && m_controller != nullptr)
   {
-    auto throttle = m_controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ARCADE_THROTTLE);
-    auto steer = m_controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ARCADE_STEER);
-
+    double throttle;
+    double steer;
+    if (abs(m_controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ARCADE_THROTTLE))< .1 )
+    {
+      throttle = 0.0;
+    }
+    else
+    {
+      throttle = m_controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ARCADE_THROTTLE)*-1;
+    }
+    if ( abs(m_controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ARCADE_STEER)) < .1)
+    {
+      steer = 0.0;
+    }
+    else
+    {
+      steer = m_controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ARCADE_STEER);
+    }
     frc::ChassisSpeeds speeds;
     speeds.vx = throttle * m_chassis->GetMaxSpeed();
     speeds.vy = 0_mps; //units::velocity::meters_per_second_t(0)
