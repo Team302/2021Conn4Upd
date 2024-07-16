@@ -79,49 +79,68 @@ void Robot::RobotPeriodic()
  */
 void Robot::AutonomousInit() 
 {
-  if (m_cyclePrims != nullptr)
-  {
-    m_cyclePrims->Init();
-  }
+  // if (m_cyclePrims != nullptr)
+  // {
+  //   m_cyclePrims->Init();
+  // }
 }
 
 void Robot::AutonomousPeriodic() 
 {
-  if (m_cyclePrims != nullptr)
-  {
-    m_cyclePrims->Run();
+  // if (m_cyclePrims != nullptr)
+  // {
+  //   m_cyclePrims->Run();
 
 
-    /**
-    frc::ChassisSpeeds speeds;
-    speeds.vx = 0_mps;
-    speeds.vy = 0_mps;
-    speeds.omega = 0_rad_per_s;
-    if (m_timer->Get() < 3_s)
-    {
-      speeds.vx = 1_mps;
-    }
-    m_chassis->Drive(speeds);
-    **/
-  }
+  //   /**
+  //   frc::ChassisSpeeds speeds;
+  //   speeds.vx = 0_mps;
+  //   speeds.vy = 0_mps;
+  //   speeds.omega = 0_rad_per_s;
+  //   if (m_timer->Get() < 3_s)
+  //   {
+  //     speeds.vx = 1_mps;
+  //   }
+  //   m_chassis->Drive(speeds);
+  //   **/
+  //}
 }
 
 void Robot::TeleopInit() 
 {
-
+  m_speedChooser.SetDefaultOption("Slow", DRIVE_SPEED::SLOW);
+  m_speedChooser.AddOption("Light Speed", DRIVE_SPEED::LIGHT_SPEED);
+  m_speedChooser.AddOption("Ridiculous Speed", DRIVE_SPEED::RIDICULOUS_SPEED);
+  m_speedChooser.AddOption("Ludirous Speed", DRIVE_SPEED::LUDICROUS_SPEED);
+  frc::SmartDashboard::PutData("SpeedChooser", &m_speedChooser);
 }
 
 void Robot::TeleopPeriodic() 
 {
   if (m_chassis != nullptr && m_controller != nullptr)
   {
-
+    double speedMultiplier = 0.0;
+    switch (m_speedChooser.GetSelected())
+    {
+      case DRIVE_SPEED::SLOW:
+        speedMultiplier = 0.25;
+        break;
+      case DRIVE_SPEED::LIGHT_SPEED:
+        speedMultiplier = 1.0;
+        break;
+      case DRIVE_SPEED::RIDICULOUS_SPEED:
+        speedMultiplier = 1.5;
+        break;
+      case DRIVE_SPEED::LUDICROUS_SPEED:
+        speedMultiplier = 2.0;
+        break;
+    }
     auto throttle = m_controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ARCADE_THROTTLE)*-1;
     auto steer = m_controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ARCADE_STEER);
     frc::ChassisSpeeds speeds;
-    speeds.vx = throttle * m_chassis->GetMaxSpeed();
+    speeds.vx = throttle * m_chassis->GetMaxSpeed()*speedMultiplier;
     speeds.vy = 0_mps; //units::velocity::meters_per_second_t(0)
-    speeds.omega = steer * m_chassis->GetMaxAngularSpeed();
+    speeds.omega = steer * m_chassis->GetMaxAngularSpeed()*speedMultiplier;
     m_chassis->Drive(speeds);
   }
 
