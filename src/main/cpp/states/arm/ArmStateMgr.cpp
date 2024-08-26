@@ -80,18 +80,18 @@ void ArmStateMgr::CheckForStateTransition()
         {
             //auto upPressed = controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_UP);
             //auto downPressed = controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_DOWN);
-            if (controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_UP) > .4  /*&&  currentState != ARM_STATE::GOING_UP */)
+            if (controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_UP)  &&  currentState != ARM_STATE::GOING_UP )
             {
                 SetCurrentState( ARM_STATE::GOING_UP, false );
             }
-            else if (controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_DOWN) > .4  /*&&  currentState != ARM_STATE::GOING_DOWN */)
+            else if (controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_DOWN)  &&  currentState != ARM_STATE::GOING_DOWN )
             {
                 SetCurrentState( ARM_STATE::GOING_DOWN, false );
             }
-            else if (controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_DOWN) < .4 && controller->GetAxisValue(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_UP)< .4)
-            {
-                SetCurrentState(ARM_STATE::HOLD_POSITION, false);
-            }
+            // else if (controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_DOWN))
+            // {
+            //     SetCurrentState(ARM_STATE::HOLD_POSITION, false);
+            // }
         }
     }
 }

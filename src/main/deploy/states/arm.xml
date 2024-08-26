@@ -5,10 +5,10 @@
 	             mode="PERCENT_OUTPUT"/>
 	<mechanismTarget stateIdentifier="ARMUP"
 	                 controlDataIdentifier="openloop"
-					 value="1.0"/>
+					 value="0.5"/>
 	<mechanismTarget stateIdentifier="ARMDOWN"
 	                 controlDataIdentifier="openloop"
-					 value="-1.0"/>
+					 value="-0.5"/>
 	<mechanismTarget stateIdentifier="ARMHOLDUP"
 	                 controlDataIdentifier="openloop"
 					 value="0.0"/>
