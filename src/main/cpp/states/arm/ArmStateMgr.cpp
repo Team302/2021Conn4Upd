@@ -35,6 +35,7 @@
 #include <subsys/MechanismTypes.h>
 #include <states/StateMgr.h>
 #include <states/StateStruc.h>
+#include <utils/Logger.h>
 
 
 // Third Party Includes
@@ -77,20 +78,24 @@ void ArmStateMgr::CheckForStateTransition()
         auto controller = TeleopControl::GetInstance();
         if ( controller != nullptr )
         {
-            auto upPressed = controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_UP);
-            auto downPressed = controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_DOWN);
-            if (upPressed  &&  currentState != ARM_STATE::GOING_UP )
+            //auto upPressed = controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_UP);
+            //auto downPressed = controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_DOWN);
+            if (controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_UP)  /*&&  currentState != ARM_STATE::GOING_UP*/ )
             {
                 SetCurrentState( ARM_STATE::GOING_UP, false );
             }
-            else if (downPressed  &&  currentState != ARM_STATE::GOING_DOWN )
+            else if (controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_DOWN)  /*&&  currentState != ARM_STATE::GOING_DOWN*/ )
             {
                 SetCurrentState( ARM_STATE::GOING_DOWN, false );
             }
-            else if (!upPressed && !downPressed)
+            else
             {
                 SetCurrentState(ARM_STATE::HOLD_POSITION, false);
             }
+            // else if (controller->IsButtonPressed(TeleopControl::FUNCTION_IDENTIFIER::ROTATE_ARM_DOWN))
+            // {
+            //     SetCurrentState(ARM_STATE::HOLD_POSITION, false);
+            // }
         }
     }
 }

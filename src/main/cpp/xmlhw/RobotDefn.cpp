@@ -100,24 +100,24 @@ void RobotDefn::ParseXML()
                     {
                         mechanismXML.get()->ParseXML(child);
                     }
-                    else if (strcmp(child.name(), "camera") == 0)
+                    /*else if (strcmp(child.name(), "camera") == 0)
                     {
                         cameraXML.get()->ParseXML(child);
                     }
-                    /**
+                    
                     else if (strcmp(child.name(), "pdp") == 0)
                     {
                         pdpXML.get()->ParseXML(child);
                     }
-                    **/
+                    
                     else if ( strcmp(child.name(), "pigeon") == 0 )
                     {
                         pigeonXML.get()->ParseXML( child);
                     }
                     else if ( strcmp(child.name(), "limelight") == 0 )
                     {
-                        ///auto limelight = limelightXML.get()->ParseXML( child);
-                    }
+                        auto limelight = limelightXML.get()->ParseXML( child);
+                    }*/
                     else
                     {
                         string msg = "unknown child ";

@@ -50,4 +50,14 @@ class Robot : public frc::TimedRobot {
   BallTransfer*         m_ballTransfer;
   Intake*               m_intake;
   CyclePrimitives*      m_cyclePrims;
+
+  enum DRIVE_SPEED
+  {
+    SLOW,
+    LIGHT_SPEED,
+    RIDICULOUS_SPEED,
+    LUDICROUS_SPEED
+  };
+
+  frc::SendableChooser<DRIVE_SPEED> m_speedChooser;
 };

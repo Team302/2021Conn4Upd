@@ -36,7 +36,7 @@ AnalogButton::AnalogButton
     double                              maxValue        // <I> - maximum value for true 
 ) : m_axis( axis ), 
     m_minValue( minValue ),
-    m_maxValue( maxValue )                                  
+    m_maxValue( maxValue )              
 {
 }
 
@@ -44,8 +44,8 @@ AnalogButton::AnalogButton
 (
     AnalogAxis*                         axis            // <I> - axis to turn into a button
 ) : m_axis( axis ), 
-    m_minValue( 0.2 ),
-    m_maxValue( 1.0 )                                  
+    m_minValue( 0.1 ),
+    m_maxValue( 1.0 )                               
 {
 }
 
@@ -62,7 +62,7 @@ bool AnalogButton::IsButtonPressed() const
     if ( m_axis != nullptr )
     {
         auto axisValue = m_axis->GetAxisValue();
-        pressed = (axisValue > m_minValue && axisValue < m_maxValue );
+        pressed = (axisValue >= m_minValue && axisValue <= m_maxValue );
     }
     return pressed;
 }

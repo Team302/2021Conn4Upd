@@ -747,7 +747,7 @@ void DragonTalon::SetForwardLimitSwitch
 	m_talon.get()->ConfigForwardLimitSwitchSource( LimitSwitchSource::LimitSwitchSource_FeedbackConnector, type, 0  );
 }
 
-void DragonTalon::SetReverseLimitSwitch
+void DragonTalon::SetReverseLimitSwitch 
 (
 	bool normallyOpen
 )
